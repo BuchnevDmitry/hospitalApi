@@ -1,7 +1,4 @@
-package ru.vsu.cs.buchnev.hospital.api.model;
-
-import java.util.Date;
-import java.util.UUID;
+package ru.vsu.cs.buchnev.hospital.api.model.response;
 
 import lombok.*;
 
@@ -10,11 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ServiceDto {
+public class ServiceResponse {
     private Integer id;
     private String name;
     private String description;
-    private Date dateRendering;
     private int price;
-    private DepartmentDto department;
 }

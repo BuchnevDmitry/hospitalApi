@@ -5,32 +5,6 @@ create table medical_card
     status bool not null
 );
 
-create table patient
-(
-    id serial primary key,
-    fio varchar not null,
-    phone_number varchar unique not null,
-    address varchar not null,
-    medical_card_id int unique not null,
-
-    foreign key (medical_card_id) references medical_card(id)
-);
-
-create table doctor
-(
-    id serial primary key,
-    fio varchar not null,
-    specalization text not null
-);
-
-create table visit
-(
-    id serial primary key,
-    date_visit date not null,
-    patient_id int references patient (id),
-    doctor_id int references doctor (id)
-);
-
 create table department
 (
     id serial primary key,
@@ -38,12 +12,12 @@ create table department
     address varchar not null
 );
 
-create table doctor_department
+create table patient
 (
-    doctor_id int,
-    department_id int,
-
-    primary key (doctor_id, department_id)
+    id serial primary key,
+    fio varchar not null,
+    phone_number varchar unique not null,
+    address varchar not null
 );
 
 create table service
@@ -54,7 +28,23 @@ create table service
     date_rendering date not null,
     price int not null,
 
-    department_id int references department (id)
+    department_id int references department (id) on delete set null
+);
+
+create table doctor
+(
+    id serial primary key,
+    fio varchar not null,
+    specalization text not null,
+    department_id int references department (id) on delete set null
+);
+
+create table visit
+(
+    id serial primary key,
+    date_visit date not null,
+    patient_id int references patient (id) on delete set null,
+    doctor_id int references doctor (id) on delete set null
 );
 
 create table service_visit

@@ -1,19 +1,16 @@
-package ru.vsu.cs.buchnev.hospital.api.model;
+package ru.vsu.cs.buchnev.hospital.api.model.response;
 
 import lombok.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PatientDto {
+public class PatientResponse {
     private Integer id;
     private String fio;
     private String phoneNumber;
     private String address;
-    private List<MedicalCardDto> medicalCards;
+    //private MedicalCardDto medicalCard;
 }

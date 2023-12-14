@@ -2,14 +2,12 @@ package ru.vsu.cs.buchnev.hospital.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.vsu.cs.buchnev.hospital.api.model.DepartmentDto;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
 import ru.vsu.cs.buchnev.hospital.item.DepartmentRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.DepartmentItem;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

@@ -25,8 +25,8 @@ public class PatientItem {
     private String phoneNumber;
     private String address;
 
-    @OneToMany(mappedBy = "patient")
-    private List<MedicalCardItem> medicalCard;
-
+//    @OneToOne
+//    @JoinColumn(name = "medical_card_id")
+//    private MedicalCardItem medicalCard;
 
 }

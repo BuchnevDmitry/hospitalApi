@@ -1,17 +1,14 @@
-package ru.vsu.cs.buchnev.hospital.api.model;
+package ru.vsu.cs.buchnev.hospital.api.model.request;
 
 import lombok.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DoctorDto {
-    private Integer id;
+public class DoctorRequest {
     private String fio;
     private String specalization;
+    private int departmentId;
 }

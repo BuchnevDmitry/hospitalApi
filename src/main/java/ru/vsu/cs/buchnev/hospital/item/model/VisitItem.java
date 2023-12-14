@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Generated;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +28,12 @@ public class VisitItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PatientItem patient;
+
+    @ManyToMany
+    @JoinTable(name = "service_visit",
+            joinColumns = {@JoinColumn(name = "visit_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")})
+    private List<ServiceItem> services;
 
 
 }

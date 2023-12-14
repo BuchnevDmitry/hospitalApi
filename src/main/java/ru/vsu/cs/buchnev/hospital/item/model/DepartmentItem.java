@@ -3,10 +3,8 @@ package ru.vsu.cs.buchnev.hospital.item.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Generated;
-import ru.vsu.cs.buchnev.hospital.api.model.DoctorDto;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "department")
@@ -22,11 +20,11 @@ public class DepartmentItem {
     private String name;
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "doctor_department",
-            joinColumns = {@JoinColumn(name = "department_id")},
-            inverseJoinColumns = {@JoinColumn(name = "doctor_id")})
-    private List<DoctorItem> doctors; ;
+    @OneToMany(mappedBy = "department")
+    private List<DoctorItem> doctors;
+
+    @OneToMany(mappedBy = "department")
+    private List<ServiceItem> services;
 
 
 }

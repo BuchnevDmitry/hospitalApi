@@ -2,41 +2,42 @@ package ru.vsu.cs.buchnev.hospital.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vsu.cs.buchnev.hospital.api.model.DepartmentDto;
+import ru.vsu.cs.buchnev.hospital.api.model.request.DepartmentRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DepartmentResponse;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface DepartmentApi {
 
     @GetMapping("/departments")
-    ResponseEntity<List<DepartmentDto>> getAllDepartmnets();
+    ResponseEntity<List<DepartmentResponse>> getAllDepartmnets();
 
     @GetMapping("/department/{departmentId}")
-    ResponseEntity<DepartmentDto> getDepartment(
+    ResponseEntity<DepartmentResponse> getDepartment(
             @PathVariable("departmentId")
             Integer departmentId
     );
 
     @PostMapping("/departments")
-    ResponseEntity<DepartmentDto> addDepartment(
+    ResponseEntity<DepartmentResponse> addDepartment(
             @RequestBody
-            DepartmentDto department
+            DepartmentRequest department
     );
 
-    @PostMapping("/departments/{departmentId}")
-    ResponseEntity<DepartmentDto> updateDepartment(
+    @PutMapping("/department/{departmentId}")
+    ResponseEntity<DepartmentResponse> updateDepartment(
             @PathVariable("departmentId")
             Integer departmentId,
 
             @RequestBody
-            DepartmentDto department
+            DepartmentRequest department
     );
 
-    @DeleteMapping("/departments/{departmentId}")
+    @DeleteMapping("/department/{departmentId}")
     ResponseEntity<Void> deleteDepartment(
             @PathVariable("departmentId")
             Integer departmentId
     );
+
 
 }

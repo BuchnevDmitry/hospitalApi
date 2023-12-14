@@ -2,42 +2,41 @@ package ru.vsu.cs.buchnev.hospital.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vsu.cs.buchnev.hospital.api.model.DepartmentDto;
-import ru.vsu.cs.buchnev.hospital.api.model.DoctorDto;
+import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface DoctorApi {
 
     @GetMapping("/doctors")
-    ResponseEntity<List<DoctorDto>> getAllDoctors();
+    ResponseEntity<List<DoctorResponse>> getAllDoctors();
 
-    @GetMapping("/doctors/{doctorsId}")
-    ResponseEntity<DoctorDto> getDoctor(
+    @GetMapping("/doctor/{doctorId}")
+    ResponseEntity<DoctorResponse> getDoctor(
             @PathVariable("doctorId")
-            UUID departmentId
+            Integer doctorId
     );
 
-    @PostMapping("/doctors")
-    ResponseEntity<DoctorDto> addDoctors(
+    @PostMapping("/doctor")
+    ResponseEntity<DoctorResponse> addDoctors(
             @RequestBody
-            DoctorDto doctor
+            DoctorRequest doctor
     );
 
-    @PostMapping("/doctor/{doctorId}")
-    ResponseEntity<DoctorDto> updateDoctor(
+    @PutMapping("/doctor/{doctorId}")
+    ResponseEntity<DoctorResponse> updateDoctor(
             @PathVariable("doctorId")
-            UUID doctorId,
+            Integer doctorId,
 
             @RequestBody
-            DoctorDto doctor
+            DoctorRequest doctor
     );
 
     @DeleteMapping("/doctor/{doctorId}")
     ResponseEntity<Void> deleteDoctor(
             @PathVariable("doctorId")
-            UUID doctorId
+            Integer doctorId
     );
 
 }

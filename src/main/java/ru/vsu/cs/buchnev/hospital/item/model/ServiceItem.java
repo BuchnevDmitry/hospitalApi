@@ -8,10 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Generated;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
 @Entity
 @Table(name = "service")
 @Data
@@ -24,16 +20,8 @@ public class ServiceItem {
     private Integer id;
     private String name;
     private String description;
-    @Column(name = "date_rendering")
-    private Date dateRendering;
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private DepartmentItem department;
-
-    @ManyToMany
-    @JoinTable(name = "service_visit",
-            joinColumns = {@JoinColumn(name = "service_id")},
-            inverseJoinColumns = {@JoinColumn(name = "visit_id")})
-    private List<VisitItem> visits;
 }

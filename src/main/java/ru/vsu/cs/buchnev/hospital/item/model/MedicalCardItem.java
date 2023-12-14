@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "department")
+@Table(name = "medical_card")
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,10 +18,8 @@ public class MedicalCardItem {
     @Id
     @Generated
     private Integer id;
+
     @Column(name = "date_create")
     private Date dateСreate;
     private Boolean status;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PatientItem patient;
 }

@@ -1,18 +1,20 @@
-package ru.vsu.cs.buchnev.hospital.api.model;
+package ru.vsu.cs.buchnev.hospital.api.model.request;
 
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DepartmentDto {
-    private Integer id;
+public class DepartmentRequest {
     private String name;
     private String address;
-    private List<DoctorDto> doctors;
 }
+
+//springlaud
+//mongoDB
+//ELK
+//minIO

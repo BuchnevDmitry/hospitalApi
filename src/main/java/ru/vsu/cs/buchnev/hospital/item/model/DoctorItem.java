@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Generated;
 
-import java.util.List;
-import java.util.UUID;
-
 @Entity
 @Table(name = "doctor")
 @Data
@@ -21,4 +18,6 @@ public class DoctorItem {
     private String fio;
     private String specalization;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DepartmentItem department;
 }
