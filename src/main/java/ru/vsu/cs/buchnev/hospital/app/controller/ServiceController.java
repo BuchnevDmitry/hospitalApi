@@ -58,7 +58,7 @@ public class ServiceController implements ServiceApi {
 
     @Override
     public ResponseEntity<Void> deleteService(Integer serviceId) {
-        for (VisitItem item: visitService.getAllVisit(PageRequest.of(page, size))) {
+        for (VisitItem item: visitService.getAllVisit()) {
             visitService.deleteServiceToVisit(item.getId(), serviceId);
         }
         serviceService.deleteService(serviceId);

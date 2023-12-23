@@ -21,6 +21,12 @@ public class VisitServiceImpl implements VisitService {
     private final VisitRepository visitRepository;
     private final PatientRepository patientRepository;
     private final ServiceService serviceService;
+
+    @Override
+    public List<VisitItem> getAllVisit() {
+        return visitRepository.findAll();
+    }
+
     @Override
     public List<VisitItem> getAllVisit(PageRequest pageRequest) {
         Page<VisitItem> page = visitRepository.findAll(pageRequest);
