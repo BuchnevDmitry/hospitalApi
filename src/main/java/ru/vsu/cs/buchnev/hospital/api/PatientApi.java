@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface PatientApi {
     @GetMapping("/patients")
-    ResponseEntity<List<PatientResponse>> getAllPatients();
+    ResponseEntity<List<PatientResponse>> getAllPatients(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+            );
 
     @GetMapping("/patient/{patientId}")
     ResponseEntity<PatientResponse> getPatient(

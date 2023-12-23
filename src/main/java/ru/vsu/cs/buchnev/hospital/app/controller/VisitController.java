@@ -2,6 +2,7 @@ package ru.vsu.cs.buchnev.hospital.app.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,8 @@ public class VisitController implements VisitApi {
     private final VisitMapper visitMapper;
 
     @Override
-    public ResponseEntity<List<VisitResponse>> getAllVisits() {
-        List<VisitItem> allVisits = visitService.getAllVisit();
+    public ResponseEntity<List<VisitResponse>> getAllVisits(int page, int size) {
+        List<VisitItem> allVisits = visitService.getAllVisit(PageRequest.of(page, size));
         return ResponseEntity.ok(visitMapper.mapToDto(allVisits));
     }
 

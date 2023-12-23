@@ -1,6 +1,7 @@
 package ru.vsu.cs.buchnev.hospital.app.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class PatientController implements PatientApi {
     private final PatientService patientService;
     private final PatientMapper patientMapper;
     @Override
-    public ResponseEntity<List<PatientResponse>> getAllPatients() {
-        List<PatientItem> allPatients = patientService.getAllPatient();
+    public ResponseEntity<List<PatientResponse>> getAllPatients(int page, int size) {
+        List<PatientItem> allPatients = patientService.getAllPatient(PageRequest.of(page, size));
         return ResponseEntity.ok(patientMapper.mapToDto(allPatients));
     }
 

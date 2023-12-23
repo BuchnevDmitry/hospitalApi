@@ -10,7 +10,10 @@ import java.util.List;
 public interface DepartmentApi {
 
     @GetMapping("/departments")
-    ResponseEntity<List<DepartmentResponse>> getAllDepartmnets();
+    ResponseEntity<List<DepartmentResponse>> getAllDepartments(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/department/{departmentId}")
     ResponseEntity<DepartmentResponse> getDepartment(

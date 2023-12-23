@@ -10,7 +10,10 @@ import java.util.List;
 public interface DoctorApi {
 
     @GetMapping("/doctors")
-    ResponseEntity<List<DoctorResponse>> getAllDoctors();
+    ResponseEntity<List<DoctorResponse>> getAllDoctors(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/doctor/{doctorId}")
     ResponseEntity<DoctorResponse> getDoctor(

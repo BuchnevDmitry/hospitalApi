@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface VisitApi {
     @GetMapping("/visits")
-    ResponseEntity<List<VisitResponse>> getAllVisits();
+    ResponseEntity<List<VisitResponse>> getAllVisits(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/visit/{visitId}")
     ResponseEntity<VisitResponse> getVisit(

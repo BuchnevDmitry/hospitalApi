@@ -1,6 +1,8 @@
 package ru.vsu.cs.buchnev.hospital.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
@@ -14,8 +16,9 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository departmentRepository;
     @Override
-    public List<DepartmentItem> getAllDepartments() {
-        return departmentRepository.findAll();
+    public List<DepartmentItem> getAllDepartments(PageRequest pageRequest) {
+        Page<DepartmentItem> page = departmentRepository.findAll(pageRequest);
+        return page.getContent();
     }
 
     @Override

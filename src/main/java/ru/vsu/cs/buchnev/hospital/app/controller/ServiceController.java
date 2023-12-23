@@ -2,6 +2,7 @@ package ru.vsu.cs.buchnev.hospital.app.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,6 @@ import ru.vsu.cs.buchnev.hospital.api.ServiceApi;
 import ru.vsu.cs.buchnev.hospital.api.model.request.ServiceRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.ServiceResponse;
 import ru.vsu.cs.buchnev.hospital.app.mapper.ServiceMapper;
-import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
 import ru.vsu.cs.buchnev.hospital.app.service.ServiceService;
 import ru.vsu.cs.buchnev.hospital.app.service.VisitService;
 import ru.vsu.cs.buchnev.hospital.item.model.ServiceItem;
@@ -26,8 +26,8 @@ public class ServiceController implements ServiceApi {
     private final ServiceMapper serviceMapper;
 
     @Override
-    public ResponseEntity<List<ServiceResponse>> getAllServices() {
-        List<ServiceItem> allServices = serviceService.getAllService();
+    public ResponseEntity<List<ServiceResponse>> getAllServices(int page, int size) {
+        List<ServiceItem> allServices = serviceService.getAllService(PageRequest.of(page, size));
         return ResponseEntity.ok(serviceMapper.mapToDto(allServices));
     }
 
@@ -58,7 +58,7 @@ public class ServiceController implements ServiceApi {
 
     @Override
     public ResponseEntity<Void> deleteService(Integer serviceId) {
-        for (VisitItem item: visitService.getAllVisit()) {
+        for (VisitItem item: visitService.getAllVisit(PageRequest.of(page, size))) {
             visitService.deleteServiceToVisit(item.getId(), serviceId);
         }
         serviceService.deleteService(serviceId);

@@ -1,10 +1,11 @@
 package ru.vsu.cs.buchnev.hospital.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.ServiceService;
-import ru.vsu.cs.buchnev.hospital.item.DoctorRepository;
 import ru.vsu.cs.buchnev.hospital.item.ServiceRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.ServiceItem;
 
@@ -18,8 +19,9 @@ public class ServiceServiceImpl implements ServiceService {
     private final ServiceRepository serviceRepository;
 
     @Override
-    public List<ServiceItem> getAllService() {
-        return serviceRepository.findAll();
+    public List<ServiceItem> getAllService(PageRequest pageRequest) {
+        Page<ServiceItem> page = serviceRepository.findAll(pageRequest);
+        return page.getContent();
     }
 
     @Override

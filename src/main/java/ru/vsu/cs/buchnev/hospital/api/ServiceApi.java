@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface ServiceApi {
     @GetMapping("/services")
-    ResponseEntity<List<ServiceResponse>> getAllServices();
+    ResponseEntity<List<ServiceResponse>> getAllServices(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/service/{serviceId}")
     ResponseEntity<ServiceResponse> getService(

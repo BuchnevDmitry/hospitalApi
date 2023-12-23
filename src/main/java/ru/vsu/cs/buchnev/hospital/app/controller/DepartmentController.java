@@ -1,6 +1,7 @@
 package ru.vsu.cs.buchnev.hospital.app.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class DepartmentController implements DepartmentApi {
     private final DepartmentService departmentService;
     private final DepartmentMapper departmentMapper;
     @Override
-    public ResponseEntity<List<DepartmentResponse>> getAllDepartmnets() {
-        List<DepartmentItem> allDepartment = departmentService.getAllDepartments();
+    public ResponseEntity<List<DepartmentResponse>> getAllDepartments(int page, int size) {
+        List<DepartmentItem> allDepartment = departmentService.getAllDepartments(PageRequest.of(page,size));
         return ResponseEntity.ok(departmentMapper.mapToDto(allDepartment));
     }
 
