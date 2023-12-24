@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PatientService {
     List<PatientItem> getAllPatient(PageRequest pageRequest);
+    List<PatientItem> getAllPatient(String fio, String phoneNumber, String address, PageRequest pageRequest);
     PatientItem getPatient(Integer patientId);
     PatientItem createPatient(PatientItem patientItem);
     PatientItem savePatient(PatientItem currentPatient);

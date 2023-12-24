@@ -4,7 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DoctorApi {
@@ -19,6 +21,14 @@ public interface DoctorApi {
     ResponseEntity<DoctorResponse> getDoctor(
             @PathVariable("doctorId")
             Integer doctorId
+    );
+
+    @GetMapping("/doctor/result/{doctorId}")
+    ResponseEntity<DoctorResultResponse> getDoctorResult(
+            @PathVariable("doctorId")
+            Integer doctorId,
+            @RequestParam(required = false) String start,
+            @RequestParam(required = false) String end
     );
 
     @PostMapping("/doctor")

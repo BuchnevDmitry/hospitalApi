@@ -8,7 +8,7 @@ import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DoctorService;
 import ru.vsu.cs.buchnev.hospital.item.DoctorRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.DoctorItem;
-import ru.vsu.cs.buchnev.hospital.item.model.PatientItem;
+import ru.vsu.cs.buchnev.hospital.helper.Result;
 
 import java.util.List;
 
@@ -21,6 +21,14 @@ public class DoctorServiceImpl implements DoctorService {
     public List<DoctorItem> getAllDoctors(PageRequest pageRequest) {
         Page<DoctorItem> page = doctorRepository.findAll(pageRequest);
         return page.getContent();
+    }
+
+    @Override
+    public Result getDoctorResult(Integer doctorId, String startDate, String endDate) {
+        String[] start = startDate.split("-");
+        String[] end = startDate.split("-");
+        return doctorRepository.findServicesAndStatsByDoctorAndDateRange(doctorId);
+        //        return doctorRepository.findServicesAndStatsByDoctorAndDateRange(doctorId, LocalDate.of(Integer.parseInt(start[2]), Integer.parseInt(start[1]), Integer.parseInt(start[0])), LocalDate.of(Integer.parseInt(end[2]), Integer.parseInt(end[1]), Integer.parseInt(end[0])));
     }
 
     @Override

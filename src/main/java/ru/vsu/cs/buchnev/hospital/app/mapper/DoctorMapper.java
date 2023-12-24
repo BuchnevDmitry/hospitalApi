@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
 import ru.vsu.cs.buchnev.hospital.item.model.DepartmentItem;
 import ru.vsu.cs.buchnev.hospital.item.model.DoctorItem;

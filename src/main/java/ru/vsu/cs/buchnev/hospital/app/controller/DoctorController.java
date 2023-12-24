@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.buchnev.hospital.api.DoctorApi;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
 import ru.vsu.cs.buchnev.hospital.app.exeption.BadRequestException;
-import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.mapper.DoctorMapper;
 import ru.vsu.cs.buchnev.hospital.app.service.DoctorService;
 import ru.vsu.cs.buchnev.hospital.item.model.DoctorItem;
+import ru.vsu.cs.buchnev.hospital.helper.Result;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +34,13 @@ public class DoctorController implements DoctorApi {
     public ResponseEntity<DoctorResponse> getDoctor(Integer doctorId) {
         DoctorItem doctorItem = doctorService.getDoctor(doctorId);
         return ResponseEntity.ok(doctorMapper.mapToDto(doctorItem));
+    }
+
+    @Override
+    public ResponseEntity<DoctorResultResponse> getDoctorResult(Integer doctorId, String start, String end) {
+        Result result = doctorService.getDoctorResult(doctorId, start, end);
+        DoctorResponse doctor = doctorMapper.mapToDto(doctorService.getDoctor(doctorId));
+        return ResponseEntity.ok(new DoctorResultResponse(doctor, result.getCountService(), result.getSumServicePrice()));
     }
 
     @Override

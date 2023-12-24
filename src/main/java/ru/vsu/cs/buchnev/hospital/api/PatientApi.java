@@ -11,6 +11,16 @@ public interface PatientApi {
     @GetMapping("/patients")
     ResponseEntity<List<PatientResponse>> getAllPatients(
             @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "id") String sortParam
+            );
+
+    @GetMapping("/patients/find")
+    ResponseEntity<List<PatientResponse>> getPatientsWithFilter(
+            @RequestParam(required = false) String fio,
+            @RequestParam(required = false) String phoneNumber,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int size
             );
 

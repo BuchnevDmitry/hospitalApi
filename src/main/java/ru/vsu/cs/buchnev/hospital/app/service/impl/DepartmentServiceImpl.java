@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
+import ru.vsu.cs.buchnev.hospital.helper.Result;
 import ru.vsu.cs.buchnev.hospital.item.DepartmentRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.DepartmentItem;
 
@@ -19,6 +20,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<DepartmentItem> getAllDepartments(PageRequest pageRequest) {
         Page<DepartmentItem> page = departmentRepository.findAll(pageRequest);
         return page.getContent();
+    }
+
+    @Override
+    public Result getDepartmentResult(Integer departmentId, String startDate, String endDate) {
+        return departmentRepository.findServicesAndStatsByDepartmentAndDateRange(departmentId);
     }
 
     @Override

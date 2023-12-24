@@ -7,11 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.buchnev.hospital.api.DepartmentApi;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DepartmentRequest;
-import ru.vsu.cs.buchnev.hospital.api.model.response.DepartmentResponse;
-import ru.vsu.cs.buchnev.hospital.app.exeption.BadRequestException;
+import ru.vsu.cs.buchnev.hospital.api.model.response.*;
 import ru.vsu.cs.buchnev.hospital.app.mapper.DepartmentMapper;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
-import ru.vsu.cs.buchnev.hospital.app.mapper.old.DepartmentMapperOld;
+import ru.vsu.cs.buchnev.hospital.helper.Result;
 import ru.vsu.cs.buchnev.hospital.item.model.DepartmentItem;
 
 import java.util.List;
@@ -25,6 +24,15 @@ public class DepartmentController implements DepartmentApi {
     public ResponseEntity<List<DepartmentResponse>> getAllDepartments(int page, int size) {
         List<DepartmentItem> allDepartment = departmentService.getAllDepartments(PageRequest.of(page,size));
         return ResponseEntity.ok(departmentMapper.mapToDto(allDepartment));
+    }
+
+    @Override
+    public ResponseEntity<DepartmentResultResponse> getDepartmentResult(Integer departmentId, String start, String end) {
+        Result result = departmentService.getDepartmentResult(departmentId, start, end);
+        System.out.println(result.getCountService());
+        System.out.println(result.getSumServicePrice());
+        DepartmentResponse department = departmentMapper.mapToDto(departmentService.getDepartment(departmentId));
+        return ResponseEntity.ok(new DepartmentResultResponse(department, result.getCountService(), result.getSumServicePrice()));
     }
 
     @Override
