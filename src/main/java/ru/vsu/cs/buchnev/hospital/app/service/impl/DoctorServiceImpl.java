@@ -33,8 +33,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Result getDoctorResult(Integer doctorId, String startDate, String endDate) {
-        String[] start = startDate.split("-");
-        String[] end = startDate.split("-");
         return doctorRepository.findServicesAndStatsByDoctorAndDateRange(doctorId);
         //        return doctorRepository.findServicesAndStatsByDoctorAndDateRange(doctorId, LocalDate.of(Integer.parseInt(start[2]), Integer.parseInt(start[1]), Integer.parseInt(start[0])), LocalDate.of(Integer.parseInt(end[2]), Integer.parseInt(end[1]), Integer.parseInt(end[0])));
     }
