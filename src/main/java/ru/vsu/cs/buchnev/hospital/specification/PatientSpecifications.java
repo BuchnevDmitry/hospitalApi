@@ -9,7 +9,7 @@ public class PatientSpecifications {
     }
 
     public static Specification<PatientItem> hasPhoneNumber(String phoneNumber) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("phoneNumber"), phoneNumber);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("phoneNumber"), "%" + phoneNumber + "%");
     }
 
     public static Specification<PatientItem> hasAddress(String address) {

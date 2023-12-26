@@ -28,7 +28,7 @@ create table service
     date_rendering date not null,
     price int not null,
 
-    department_id int references department (id) on delete set null
+    department_id int references department (id) on delete cascade
 );
 
 create table doctor
@@ -36,15 +36,15 @@ create table doctor
     id serial primary key,
     fio varchar not null,
     specalization text not null,
-    department_id int references department (id) on delete set null
+    department_id int references department (id) on delete cascade
 );
 
 create table visit
 (
     id serial primary key,
     date_visit date not null,
-    patient_id int references patient (id) on delete set null,
-    doctor_id int references doctor (id) on delete set null
+    patient_id int references patient (id) on delete cascade,
+    doctor_id int references doctor (id) on delete cascade
 );
 
 create table service_visit
