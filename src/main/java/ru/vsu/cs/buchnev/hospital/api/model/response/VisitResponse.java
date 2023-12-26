@@ -2,6 +2,7 @@ package ru.vsu.cs.buchnev.hospital.api.model.response;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class VisitResponse {
 
     private Integer id;
-    private Date dateVisit;
+    private LocalDate dateVisit;
     private DoctorResponse doctor;
     private PatientResponse patient;
     private List<ServiceResponse> services;

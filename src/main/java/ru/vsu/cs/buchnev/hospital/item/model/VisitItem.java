@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Generated;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class VisitItem {
     @Generated
     private Integer id;
     @Column(name = "date_visit")
-    private Date dateVisit;
+    private LocalDate dateVisit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private DoctorItem doctor;
