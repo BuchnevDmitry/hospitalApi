@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DepartmentResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
@@ -17,7 +18,17 @@ public abstract class DoctorMapper {
 
     @Autowired
     protected DepartmentService departmentService;
-    public abstract DoctorResponse mapToDto(DoctorItem item);
+    @Autowired
+    protected DepartmentMapper departmentMapper;
+
+    public DoctorResponse mapToDto(DoctorItem item) {
+        return DoctorResponse.builder().id(item.getId())
+                .fio(item.getFio()).specalization(item.getSpecalization())
+                .department(DepartmentResponse.builder()
+                        .id(item.getDepartment().getId())
+                        .name(item.getDepartment().getName())
+                        .address(item.getDepartment().getAddress()).build()).build();
+    };
     public abstract List<DoctorResponse> mapToDto(List<DoctorItem> items);
     public abstract List<DoctorItem> mapToItem(List<DoctorResponse> items);
     public abstract DoctorItem mapToItem(DoctorResponse dto);
