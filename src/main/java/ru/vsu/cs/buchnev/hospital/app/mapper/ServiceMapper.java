@@ -6,6 +6,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.request.ServiceRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DepartmentResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.ServiceResponse;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
 import ru.vsu.cs.buchnev.hospital.item.model.DepartmentItem;
@@ -18,7 +19,16 @@ import java.util.List;
 public abstract class ServiceMapper {
     @Autowired
     protected DepartmentService departmentService;
-    public abstract ServiceResponse mapToDto(ServiceItem item);
+    public ServiceResponse mapToDto(ServiceItem item) {
+        return ServiceResponse.builder().id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .price(item.getPrice())
+                .department(DepartmentResponse.builder()
+                        .id(item.getDepartment().getId())
+                        .name(item.getDepartment().getName())
+                        .address(item.getDepartment().getAddress()).build()).build();
+    };
     public abstract List<ServiceResponse> mapToDto(List<ServiceItem> items);
     public abstract List<ServiceItem> mapToItem(List<ServiceResponse> items);
     public abstract ServiceItem mapToItem(ServiceResponse dto);

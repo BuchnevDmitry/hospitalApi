@@ -12,4 +12,5 @@ public class ServiceResponse {
     private String name;
     private String description;
     private int price;
+    private DepartmentResponse department;
 }
