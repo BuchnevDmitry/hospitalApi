@@ -9,6 +9,7 @@ import java.util.List;
 public interface DoctorService {
     List<DoctorItem> getAllDoctors(PageRequest pageRequest);
 
+    List<DoctorItem> getAllDoctors(String fio, String specialization, PageRequest pageRequest);
     Result getDoctorResult(Integer doctorId, String startDate, String endDate);
     DoctorItem getDoctor(Integer doctorId);
     DoctorItem createDoctor(DoctorItem doctorItem);

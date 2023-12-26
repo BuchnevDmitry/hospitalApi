@@ -29,8 +29,6 @@ public class DepartmentController implements DepartmentApi {
     @Override
     public ResponseEntity<DepartmentResultResponse> getDepartmentResult(Integer departmentId, String start, String end) {
         Result result = departmentService.getDepartmentResult(departmentId, start, end);
-        System.out.println(result.getCountService());
-        System.out.println(result.getSumServicePrice());
         DepartmentResponse department = departmentMapper.mapToDto(departmentService.getDepartment(departmentId));
         return ResponseEntity.ok(new DepartmentResultResponse(department, result.getCountService(), result.getSumServicePrice()));
     }

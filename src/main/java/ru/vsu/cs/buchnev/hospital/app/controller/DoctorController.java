@@ -9,6 +9,7 @@ import ru.vsu.cs.buchnev.hospital.api.DoctorApi;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.PatientResponse;
 import ru.vsu.cs.buchnev.hospital.app.exeption.BadRequestException;
 import ru.vsu.cs.buchnev.hospital.app.mapper.DoctorMapper;
 import ru.vsu.cs.buchnev.hospital.app.service.DoctorService;
@@ -35,6 +36,13 @@ public class DoctorController implements DoctorApi {
         DoctorItem doctorItem = doctorService.getDoctor(doctorId);
         return ResponseEntity.ok(doctorMapper.mapToDto(doctorItem));
     }
+
+    @Override
+    public ResponseEntity<List<DoctorResponse>> getDoctorsWithFilter(String fio, String specialization, int page, int size) {
+        List<DoctorItem> allDoctors = doctorService.getAllDoctors(fio,specialization, PageRequest.of(page, size));
+        return ResponseEntity.ok(doctorMapper.mapToDto(allDoctors));
+    }
+
 
     @Override
     public ResponseEntity<DoctorResultResponse> getDoctorResult(Integer doctorId, String start, String end) {

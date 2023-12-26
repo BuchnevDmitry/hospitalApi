@@ -1,9 +1,11 @@
 package ru.vsu.cs.buchnev.hospital.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.vsu.cs.buchnev.hospital.app.exeption.DepartmentException;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DepartmentService;
 import ru.vsu.cs.buchnev.hospital.helper.Result;

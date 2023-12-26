@@ -3,15 +3,18 @@ package ru.vsu.cs.buchnev.hospital.app.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.ServiceService;
 import ru.vsu.cs.buchnev.hospital.app.service.VisitService;
+import ru.vsu.cs.buchnev.hospital.specification.VisitSpecifications;
 import ru.vsu.cs.buchnev.hospital.item.PatientRepository;
 import ru.vsu.cs.buchnev.hospital.item.VisitRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.PatientItem;
 import ru.vsu.cs.buchnev.hospital.item.model.VisitItem;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -30,6 +33,14 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public List<VisitItem> getAllVisit(PageRequest pageRequest) {
         Page<VisitItem> page = visitRepository.findAll(pageRequest);
+        return page.getContent();
+    }
+
+    @Override
+    public List<VisitItem> getAllVisit(String date, PageRequest pageRequest) {
+        String[] dateItems = date.split("-");
+        LocalDate dateLocal = LocalDate.of(Integer.parseInt(dateItems[2]), Integer.parseInt(dateItems[1]), Integer.parseInt(dateItems[0]));
+        Page<VisitItem> page = visitRepository.findAll(Specification.where(VisitSpecifications.visitedAfter(dateLocal)), pageRequest);
         return page.getContent();
     }
 

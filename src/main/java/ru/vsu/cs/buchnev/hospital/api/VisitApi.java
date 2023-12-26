@@ -3,6 +3,7 @@ package ru.vsu.cs.buchnev.hospital.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.buchnev.hospital.api.model.request.VisitRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.PatientResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.VisitResponse;
 
 import java.util.List;
@@ -10,6 +11,13 @@ import java.util.List;
 public interface VisitApi {
     @GetMapping("/visits")
     ResponseEntity<List<VisitResponse>> getAllVisits(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    );
+
+    @GetMapping("/visits/find")
+    ResponseEntity<List<VisitResponse>> getVisitsWithFilter(
+            @RequestParam(required = false) String date,
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int size
     );

@@ -3,9 +3,11 @@ package ru.vsu.cs.buchnev.hospital.app.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.DoctorService;
+import ru.vsu.cs.buchnev.hospital.specification.DoctorSpecifications;
 import ru.vsu.cs.buchnev.hospital.item.DoctorRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.DoctorItem;
 import ru.vsu.cs.buchnev.hospital.helper.Result;
@@ -20,6 +22,12 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorItem> getAllDoctors(PageRequest pageRequest) {
         Page<DoctorItem> page = doctorRepository.findAll(pageRequest);
+        return page.getContent();
+    }
+
+    @Override
+    public List<DoctorItem> getAllDoctors(String fio, String specialization, PageRequest pageRequest) {
+        Page<DoctorItem> page = doctorRepository.findAll(Specification.where(DoctorSpecifications.hasFio(fio)).or(DoctorSpecifications.hasSpecialization(specialization)), pageRequest);
         return page.getContent();
     }
 

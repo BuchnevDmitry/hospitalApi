@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.buchnev.hospital.api.ServiceApi;
 import ru.vsu.cs.buchnev.hospital.api.model.request.ServiceRequest;
+import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.ServiceResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.ServiceResultResponse;
 import ru.vsu.cs.buchnev.hospital.app.mapper.ServiceMapper;
 import ru.vsu.cs.buchnev.hospital.app.service.ServiceService;
 import ru.vsu.cs.buchnev.hospital.app.service.VisitService;
+import ru.vsu.cs.buchnev.hospital.helper.Result;
 import ru.vsu.cs.buchnev.hospital.item.model.ServiceItem;
 import ru.vsu.cs.buchnev.hospital.item.model.VisitItem;
 
@@ -29,6 +32,19 @@ public class ServiceController implements ServiceApi {
     public ResponseEntity<List<ServiceResponse>> getAllServices(int page, int size) {
         List<ServiceItem> allServices = serviceService.getAllService(PageRequest.of(page, size));
         return ResponseEntity.ok(serviceMapper.mapToDto(allServices));
+    }
+
+    @Override
+    public ResponseEntity<List<ServiceResponse>> getServicesWithFilter(String name, int page, int size) {
+        List<ServiceItem> allServices = serviceService.getAllService(name, PageRequest.of(page, size));
+        return ResponseEntity.ok(serviceMapper.mapToDto(allServices));
+    }
+
+    @Override
+    public ResponseEntity<ServiceResultResponse> getDoctorResult(String start, String end) {
+        Result result = serviceService.getServiceResult();
+        return ResponseEntity.ok(new ServiceResultResponse(result.getCountService(), result.getSumServicePrice()));
+
     }
 
     @Override

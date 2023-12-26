@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.buchnev.hospital.app.exeption.NotFoundException;
 import ru.vsu.cs.buchnev.hospital.app.service.PatientService;
-import ru.vsu.cs.buchnev.hospital.helper.PatientSpecifications;
+import ru.vsu.cs.buchnev.hospital.specification.PatientSpecifications;
 import ru.vsu.cs.buchnev.hospital.item.PatientRepository;
 import ru.vsu.cs.buchnev.hospital.item.model.PatientItem;
 

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.buchnev.hospital.api.model.request.DoctorRequest;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResponse;
 import ru.vsu.cs.buchnev.hospital.api.model.response.DoctorResultResponse;
+import ru.vsu.cs.buchnev.hospital.api.model.response.PatientResponse;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,6 +22,14 @@ public interface DoctorApi {
     ResponseEntity<DoctorResponse> getDoctor(
             @PathVariable("doctorId")
             Integer doctorId
+    );
+
+    @GetMapping("/doctors/find")
+    ResponseEntity<List<DoctorResponse>> getDoctorsWithFilter(
+            @RequestParam(required = false) String fio,
+            @RequestParam(required = false) String specialization,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
     );
 
     @GetMapping("/doctor/result/{doctorId}")

@@ -1,4 +1,4 @@
-package ru.vsu.cs.buchnev.hospital.helper;
+package ru.vsu.cs.buchnev.hospital.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 import ru.vsu.cs.buchnev.hospital.item.model.PatientItem;

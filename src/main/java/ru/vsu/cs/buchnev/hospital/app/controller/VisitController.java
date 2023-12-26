@@ -32,6 +32,12 @@ public class VisitController implements VisitApi {
     }
 
     @Override
+    public ResponseEntity<List<VisitResponse>> getVisitsWithFilter(String date, int page, int size) {
+        List<VisitItem> allVisits = visitService.getAllVisit(date, PageRequest.of(page, size));
+        return ResponseEntity.ok(visitMapper.mapToDto(allVisits));
+    }
+
+    @Override
     public ResponseEntity<VisitResponse> getVisit(Integer visitId) {
         VisitItem visitItem = visitService.getVisit(visitId);
         return ResponseEntity.ok(visitMapper.mapToDto(visitItem));
